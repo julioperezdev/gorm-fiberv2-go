@@ -15,12 +15,6 @@ type Todo struct {
 	Completed bool   `json:"completed"`
 }
 
-//
-//var todos = []Todo{
-//	{ID: 1, Name: "julio", Completed: false},
-//	{ID: 2, Name: "maria", Completed: true},
-//}
-
 func MigrateTodo(sql *gorm.DB) {
 	sql.AutoMigrate(&Todo{})
 	fmt.Println("Todo Entity migrated")
@@ -69,33 +63,30 @@ func PostTodo(ctx *fiber.Ctx) error {
 		Name:      body.Name,
 		Completed: body.Completed,
 	}
-	//todos = append(todos, particularTodo)
-	//var todo = Todo{Name: "Julio", Completed: false}
+
 	db.Create(&particularTodo)
 	return ctx.Status(fiber.StatusCreated).JSON(particularTodo)
 
 }
 
-/*
 func DeleteTodo(ctx *fiber.Ctx) error {
+	db := repository.ConnectMysql()
+	var todo Todo
+	MigrateTodo(db)
 	paramID := ctx.Params("id")
-	id, err := strconv.Atoi(paramID)
+	idTodo, err := strconv.Atoi(paramID)
 	if err != nil {
 		return ctx.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"error": "Invalid Id",
 		})
 	}
-	for i, todo := range todos {
-		if todo.ID == id {
-			todos = append(todos[0:i], todos[i+i:]...)
-			return ctx.Status(fiber.StatusOK).JSON(todo)
-		}
-	}
-	return ctx.Status(fiber.StatusNotFound).JSON(fiber.Map{
-		"error": "Record not found",
+	db.Delete(&todo, idTodo)
+	return ctx.Status(fiber.StatusOK).JSON(fiber.Map{
+		"ok": "Todo Deleted",
 	})
 }
 
+/*
 func PatchTodo(ctx *fiber.Ctx) error {
 
 	type request struct {

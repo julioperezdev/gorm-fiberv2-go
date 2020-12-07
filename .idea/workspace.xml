@@ -75,7 +75,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Committing first file to connect with MySql" />
     <MESSAGE value="fixing get and post method to do a transaction in mysql with gorm" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing get and post method to do a transaction in mysql with gorm" />
+    <MESSAGE value="adding GetTodoById functionality using Gorm" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding GetTodoById functionality using Gorm" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
