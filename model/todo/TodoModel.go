@@ -82,13 +82,14 @@ func DeleteTodo(ctx *fiber.Ctx) error {
 	}
 	db.Delete(&todo, idTodo)
 	return ctx.Status(fiber.StatusOK).JSON(fiber.Map{
-		"ok": "Todo Deleted",
+		"Successfully": "Todo was deleted",
 	})
 }
 
-/*
 func PatchTodo(ctx *fiber.Ctx) error {
-
+	db := repository.ConnectMysql()
+	var todo Todo
+	MigrateTodo(db)
 	type request struct {
 		Name      string `json:"name"`
 		Completed bool   `json:"completed"`
@@ -100,27 +101,18 @@ func PatchTodo(ctx *fiber.Ctx) error {
 			"error": "Cannot parser JSON",
 		})
 	}
-
 	paramID := ctx.Params("id")
-	id, err := strconv.Atoi(paramID)
+	idTodo, err := strconv.Atoi(paramID)
 	if err != nil {
 		return ctx.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"error": "Invalid Id",
 		})
 	}
-	for i, todo := range todos {
-		if todo.ID == id {
-			todos[i] = Todo{
-				ID:        id,
-				Name:      body.Name,
-				Completed: body.Completed,
-			}
-			return ctx.Status(fiber.StatusOK).JSON(todos[i])
-		}
-	}
-	return ctx.Status(fiber.StatusNotFound).JSON(fiber.Map{
-		"error": "Record not found",
+	db.First(&todo, idTodo)
+	todo.Name = body.Name
+	todo.Completed = body.Completed
+	db.Save(&todo)
+	return ctx.Status(fiber.StatusOK).JSON(fiber.Map{
+		"Successfully": "Todo was updated",
 	})
 }
-
-*/
