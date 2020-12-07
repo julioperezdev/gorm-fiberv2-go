@@ -1,6 +1,7 @@
 package todo
 
 import (
+	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"gorm-fiberv2-go/repository"
 	"gorm.io/gorm"
@@ -19,35 +20,43 @@ type Todo struct {
 //	{ID: 2, Name: "maria", Completed: true},
 //}
 
+func MigrateTodo(sql *gorm.DB) {
+	sql.AutoMigrate(&Todo{})
+	fmt.Println("Todo Entity migrated")
+}
+
 func GetTodo(ctx *fiber.Ctx) error {
-	sql := repository.ConnectMysql()
+	db := repository.ConnectMysql()
 	var todosDB []Todo
-	sql.Find(&todosDB)
+	MigrateTodo(db)
+	db.Find(&todosDB)
 	return ctx.Status(fiber.StatusOK).JSON(todosDB)
 }
 
 func PostTodo(ctx *fiber.Ctx) error {
 	db := repository.ConnectMysql()
-	var todoDB Todo
+	//var todoDB Todo
+	MigrateTodo(db)
 	//type request struct {
 	//	Name      string `json:"name"`
 	//	Completed bool   `json:"completed"`
 	//}
 	//var body request
-	err := ctx.BodyParser(&todoDB)
-	if err != nil {
-		return ctx.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "Cannot parse JSON",
-		})
-	}
+	//err := ctx.BodyParser(&todoDB)
+	//if err != nil {
+	//	return ctx.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+	//		"error": "Cannot parse JSON",
+	//	})
+	//}
 	//particularTodo := Todo{
 	//	ID:        len(todos) + 1,
 	//	Name:      body.Name,
 	//	Completed: body.Completed,
 	//}
 	//todos = append(todos, particularTodo)
-	db.Create(&todoDB)
-	return ctx.Status(fiber.StatusCreated).JSON(todoDB)
+	var todo = Todo{Name: "Julio", Completed: false}
+	db.Create(&todo)
+	return ctx.Status(fiber.StatusCreated).JSON(todo)
 
 }
 
