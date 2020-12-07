@@ -4,7 +4,7 @@
     <list default="true" id="d3915a75-df38-436c-b2d8-99e92f9d0272" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/todo/TodoModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/todo/TodoModel.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repository/Mysql.go" beforeDir="false" afterPath="$PROJECT_DIR$/repository/Mysql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/todoRoutes/TodoRoutes.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/todoRoutes/TodoRoutes.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,9 +60,22 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Committing first file to connect with MySql" />
-    <option name="LAST_COMMIT_MESSAGE" value="Committing first file to connect with MySql" />
+    <MESSAGE value="fixing get and post method to do a transaction in mysql with gorm" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing get and post method to do a transaction in mysql with gorm" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
