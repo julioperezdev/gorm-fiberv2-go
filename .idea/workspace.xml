@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3915a75-df38-436c-b2d8-99e92f9d0272" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/model/person/PersonModel.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/contactFormRoutes/ContactFormRoutes.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/personRoutes/PersonRoutes.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/contactForm/ContactFormModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/contactForm/ContactFormModel.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +77,8 @@
     <MESSAGE value="adding GetTodoById functionality using Gorm" />
     <MESSAGE value="adding DeleteTodo functionality using Gorm" />
     <MESSAGE value="adding PatchTodo functionality using Gorm" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding PatchTodo functionality using Gorm" />
+    <MESSAGE value="adding Person and ContactForm entities that can be use with Gorm" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding Person and ContactForm entities that can be use with Gorm" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

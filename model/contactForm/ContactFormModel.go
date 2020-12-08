@@ -43,14 +43,23 @@ func BodyRequest(ctx *fiber.Ctx) ContactForm {
 }
 
 func SendMailContactForm(ctx *fiber.Ctx) error {
-	auth := smtp.PlainAuth("", "ceo@protobot.dev", "9513451Julio", "smtpout.secureserver.net")
+	auth := smtp.PlainAuth(
+		"",
+		"ceo@protobot.dev",
+		"XXXXXXXXXXXXXXXXXXX",
+		"smtpout.secureserver.net")
 
 	to := []string{"perezjulioernesto@gmail.com"}
 	msg := []byte("To: recipient@example.net\r\n" +
 		"Subject: discount Gophers!\r\n" +
 		"\r\n" +
 		"This is the email body.\r\n")
-	err := smtp.SendMail("smtpout.secureserver.net:465", auth, "ceo@protobot.dev", to, msg)
+	err := smtp.SendMail(
+		"smtpout.secureserver.net:465",
+		auth,
+		"ceo@protobot.dev",
+		to,
+		msg)
 	if err != nil {
 		log.Fatal(err)
 	}
