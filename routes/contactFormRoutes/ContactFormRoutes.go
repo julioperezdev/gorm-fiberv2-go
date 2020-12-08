@@ -6,5 +6,9 @@ import (
 )
 
 func SetupContactFormRoutes(app *fiber.App) {
+
+	app.Get("/contactForm", contactForm.GetAllContactForm)
+	app.Post("/contactForm", contactForm.SaveContactForm)
 	app.Post("/mail", contactForm.SendMailContactForm)
+
 }

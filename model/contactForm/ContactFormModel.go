@@ -3,6 +3,7 @@ package contactForm
 import (
 	"fmt"
 	"github.com/gofiber/fiber/v2"
+	"gorm-fiberv2-go/repository"
 	"gorm.io/gorm"
 	"log"
 	"net/smtp"
@@ -10,9 +11,9 @@ import (
 
 type ContactForm struct {
 	gorm.Model
-	name    string `json:"name"`
-	gender  string `json:"gender"`
-	content string `json:"content"`
+	Name    string `json:"name"`
+	Gender  string `json:"gender"`
+	Content string `json:"content"`
 }
 
 func MigrateContactForm(sql *gorm.DB) {
@@ -20,11 +21,21 @@ func MigrateContactForm(sql *gorm.DB) {
 	fmt.Println("Contact Form Entity migrated")
 }
 
-func BodyRequest(ctx *fiber.Ctx) ContactForm {
+func GetAllContactForm(ctx *fiber.Ctx) error {
+	db := repository.ConnectMysql()
+	MigrateContactForm(db)
+	var contactForms []ContactForm
+	db.Find(&contactForms)
+	return ctx.Status(fiber.StatusOK).JSON(contactForms)
+}
+
+func SaveContactForm(ctx *fiber.Ctx) error {
+	db := repository.ConnectMysql()
+	MigrateContactForm(db)
 	type request struct {
-		name    string `json:"name"`
-		gender  string `json:"gender"`
-		content string `json:"content"`
+		Name    string `json:"name"`
+		Gender  string `json:"gender"`
+		Content string `json:"content"`
 	}
 	var body request
 	err := ctx.BodyParser(&body)
@@ -34,11 +45,12 @@ func BodyRequest(ctx *fiber.Ctx) ContactForm {
 		})
 	}
 	particularContactForm := ContactForm{
-		name:    body.name,
-		gender:  body.gender,
-		content: body.content,
+		Name:    body.Name,
+		Gender:  body.Gender,
+		Content: body.Content,
 	}
-	return particularContactForm
+	db.Create(&particularContactForm)
+	return ctx.Status(fiber.StatusCreated).JSON(particularContactForm)
 
 }
 
